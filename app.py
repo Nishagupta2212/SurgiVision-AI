@@ -18,7 +18,7 @@ OUTPUT_DIR = Path(tempfile.gettempdir()) / "surgivision_outputs"
 st.set_page_config(page_title="SurgiVision Lite", page_icon="🩺", layout="wide")
 
 
-@st.cache_resource(show_spinner="Loading model...")
+@st.cache_resource(show_spinner="Loading model (the first run downloads ~22 MB of weights)...")
 def get_model():
     return load_model()
 

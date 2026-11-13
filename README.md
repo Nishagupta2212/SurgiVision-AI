@@ -52,7 +52,8 @@ SurgiVision-AI/
 ├── tests/
 │   └── test_detector.py    # Unit tests
 ├── .streamlit/config.toml  # Upload size limit
-├── requirements.txt
+├── requirements.txt        # Python dependencies (CPU-only PyTorch)
+├── packages.txt            # Linux system libraries for cloud deployment
 └── LICENSE                 # AGPL-3.0 (required by Ultralytics)
 ```
 
@@ -66,7 +67,7 @@ cd SurgiVision-AI
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1          # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-python scripts/download_model.py
+python scripts/download_model.py     # optional: the app also downloads the weights on first run
 python scripts/check_model.py         # should print the 7 instrument classes
 ```
 
@@ -77,6 +78,17 @@ streamlit run app.py
 ```
 
 Then open http://localhost:8501.
+
+## Deploy (Streamlit Community Cloud, free)
+
+1. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub.
+2. **Create app** → repository `Nishagupta2212/SurgiVision-AI`, branch `main`, main file `app.py`.
+3. **Advanced settings** → Python version **3.11**.
+4. Deploy. The first build installs CPU-only PyTorch and the app downloads the model weights on first load.
+
+`packages.txt` installs the Linux libraries OpenCV needs. Free hosting has limited memory, so use short video clips.
+
+> Vercel is not suitable: it runs short-lived serverless functions, while Streamlit needs a long-running server, and PyTorch exceeds Vercel's function size limit.
 
 ## Test
 

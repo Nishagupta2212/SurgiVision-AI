@@ -1,6 +1,6 @@
 [server]
-# Maximum upload size in MB.
-maxUploadSize = 500
+# Maximum upload size in MB. Kept modest so short clips fit within free cloud hosting memory.
+maxUploadSize = 200
 
 [browser]
 gatherUsageStats = false

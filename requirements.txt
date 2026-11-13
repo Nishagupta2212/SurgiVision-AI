@@ -1,7 +1,11 @@
-# PyTorch is installed separately first (CUDA build) - see README / setup steps.
+# CPU-only PyTorch: a much smaller install, and works on any machine and on Streamlit Community Cloud.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+
 ultralytics>=8.3.0
 opencv-python>=4.8
-streamlit>=1.30
+streamlit>=1.40
 pandas>=2.0
 huggingface_hub>=0.20
 pytest>=8.0

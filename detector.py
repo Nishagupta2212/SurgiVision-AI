@@ -12,9 +12,13 @@ from typing import Callable
 import cv2
 import numpy as np
 import pandas as pd
+from huggingface_hub import hf_hub_download
 from ultralytics import YOLO
 
-MODEL_PATH = Path(__file__).resolve().parent / "models" / "yolov8s_cholec80.pt"
+# Pretrained weights (CC BY-NC-SA 4.0) are downloaded at runtime, not committed to Git.
+MODEL_REPO_ID = "cesaraha/yolov8s-surgical-instrument-detection-cholec80"
+MODEL_FILENAME = "yolov8s_cholec80.pt"
+MODEL_PATH = Path(__file__).resolve().parent / "models" / MODEL_FILENAME
 # CPU keeps setup simple (no CUDA install) and runs on any laptop.
 DEVICE = "cpu"
 DETECTION_COLUMNS = ["frame", "time_s", "instrument", "confidence", "x1", "y1", "x2", "y2"]
@@ -25,9 +29,17 @@ DETECTION_COLUMNS = ["frame", "time_s", "instrument", "confidence", "x1", "y1", 
 VIDEO_CODECS = [("VP80", ".webm"), ("mp4v", ".mp4")]
 
 
+def download_model() -> Path:
+    MODEL_PATH.parent.mkdir(exist_ok=True)
+    return Path(hf_hub_download(repo_id=MODEL_REPO_ID, filename=MODEL_FILENAME, local_dir=MODEL_PATH.parent))
+
+
 def load_model(model_path: Path = MODEL_PATH) -> YOLO:
+    """Load the detector, downloading the default weights on first use (e.g. on a fresh cloud deploy)."""
     if not model_path.exists():
-        raise FileNotFoundError(f"Model not found at {model_path}. Run: python scripts/download_model.py")
+        if model_path != MODEL_PATH:
+            raise FileNotFoundError(f"Model not found at {model_path}")
+        download_model()
     return YOLO(str(model_path))
 
 
