@@ -1,0 +1,7 @@
+# PyTorch is installed separately first (CUDA build) - see README / setup steps.
+ultralytics>=8.3.0
+opencv-python>=4.8
+streamlit>=1.30
+pandas>=2.0
+huggingface_hub>=0.20
+pytest>=8.0

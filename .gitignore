@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Model weights (CC BY-NC-SA 4.0 - downloaded via scripts/download_model.py, not redistributed)
+models/
+*.pt
+
+# Test media and generated outputs
+samples/
+outputs/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
