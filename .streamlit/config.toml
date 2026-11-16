@@ -4,3 +4,12 @@ maxUploadSize = 200
 
 [browser]
 gatherUsageStats = false
+
+# Dark "surgical console" theme: low-glare background with a medical teal accent.
+[theme]
+base = "dark"
+primaryColor = "#2DD4BF"
+backgroundColor = "#0A0F1A"
+secondaryBackgroundColor = "#111A2B"
+textColor = "#E2E8F0"
+font = "sans serif"
